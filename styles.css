@@ -1,0 +1,84 @@
+body,
+html {
+    margin: 0;
+    height: 100%;
+}
+
+#map {
+    height: 100vh;
+}
+
+.photo-marker-inner {
+    border-radius: 4px;
+    display: inline-block;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.photo-marker-inner img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.popup-content {
+    max-width: 50vw;
+    min-width: 250px;
+    max-height: 80vh;
+    /* limit popup height */
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    overflow: auto;
+    /* scroll if content too tall */
+}
+
+.popup-image {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.popup-image img {
+    width: 100%;
+    height: auto;
+    /* maintain aspect ratio */
+    object-fit: contain;
+    /* contain inside popup */
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.popup-text {
+    /* line-height: 1.4; */
+    /* white-space: pre-line; */
+    font-size: 14px;
+    text-align: left;
+}
+
+.city-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    /* margin-bottom: 4px; */
+}
+
+
+.datetime {
+    text-align: left;
+    font-size: 10px;
+    color: #909090;
+}
+.city-name {
+    text-align: left;
+    font-size: 16px;
+}
+
+.distance {
+    font-size: 14px;
+}
