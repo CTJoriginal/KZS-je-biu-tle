@@ -4,62 +4,69 @@
         "coordinates": "46.951610, 7.458818",
         "description": "",
         "city": "Bern",
-        "dateTime": "07.07.2025 07:00"
+        "dateTime": "07.08.2025"
     },
     {
         "path": "images/2.mp4",
         "coordinates": "44.7705843, 17.1907778",
         "description": "",
         "city": "Banja Luka",
-        "dateTime": "07.07.2025 08:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/3.mp4",
         "coordinates": "47.3656727, 8.5419161",
         "description": "",
         "city": "Zürich",
-        "dateTime": "07.07.2025 09:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/4.jpg",
         "coordinates": "46.6186777, 12.3027679",
         "description": "",
         "city": "Cima Grande",
-        "dateTime": "07.07.2025 10:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/5.jpg",
         "coordinates": "37.96968, 23.72632",
         "description": "",
         "city": "Atene",
-        "dateTime": "07.07.2025 11:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/6.mp4",
         "coordinates": "37.1761339, -3.5998342",
         "description": "",
         "city": "Granada",
-        "dateTime": "07.07.2025 12:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/7.jpg",
         "coordinates": "52.376834, 4.899288",
         "description": "",
         "city": "Amsterdam",
-        "dateTime": "07.07.2025 13:00"
+        "dateTime": "02.08.2025"
     },
     {
         "path": "images/8.mp4",
         "coordinates": "44.111808, 15.234392",
         "description": "",
         "city": "Zadar",
-        "dateTime": "07.07.2025 14:00"
+        "dateTime": "07.07.2025"
     },
     {
         "path": "images/9.mp4",
         "coordinates": "44.7686677, 17.1871290",
         "description": "",
         "city": "Banja Luka",
-        "dateTime": "07.07.2025 15:00"
+        "dateTime": "07.07.2025"
+    },
+    {
+        "path": "images/10.png",
+        "coordinates": "46.493652, 15.107746",
+        "description": "",
+        "city": "Šmartno pri Slovenj Gradcu",
+        "dateTime": "10.8.2025"
     }
 ]

@@ -25,7 +25,7 @@ const esriSat = L.tileLayer(
 
 
 // Add default layer to map
-Stadia_OSMBright.addTo(map);
+esriSat.addTo(map);
 
 // Create base layers object
 const baseLayers = {
@@ -36,17 +36,43 @@ const baseLayers = {
 };
 
 // Add layer control to map
-L.control.layers(baseLayers).addTo(map);
+L.control.layers(baseLayers, null, { collapsed: false }).addTo(map);
 
-const markerCluster = L.markerClusterGroup();
-map.addLayer(markerCluster);
+
+const markers = L.markerClusterGroup({
+  iconCreateFunction: function (cluster) {
+    const count = cluster.getChildCount();
+    // size buckets — tweak thresholds/sizes if you want
+    const bucket =
+      count < 3 ? { cls: 'small', size: 10 } :
+        count < 10 ? { cls: 'medium', size: 30 } :
+          { cls: 'large', size: 54 };
+
+    const html = `
+      <div class="custom-cluster ${bucket.cls}" role="button" aria-label="${count} items">
+        <div class="cluster-inner">
+          <span class="cluster-count">${count}</span>
+        </div>
+      </div>
+    `;
+
+    return L.divIcon({
+      html,
+      className: 'custom-cluster-wrapper',
+      iconSize: L.point(bucket.size, bucket.size),
+      iconAnchor: L.point(Math.round(bucket.size / 2), Math.round(bucket.size / 2))
+    });
+  }
+});
+
+map.addLayer(markers);
 
 const markerBounds = L.latLngBounds();
 const refPoint = { lat: 46.049698, lon: 14.109393 }; // KŽŠ koordinate
 
 const specialMarker = L.marker(refPoint, {
   icon: L.icon({
-    iconUrl: 'images/kžš.png',
+    iconUrl: 'images/kžš-simple.png',
     iconSize: [32, 32],
   }),
   zIndexOffset: -1000 // makes it appear below others
@@ -117,13 +143,13 @@ async function loadImages(images) {
 
     const icon = L.divIcon({
       className: 'photo-marker',
-      html: `<div class="photo-marker-inner"><img src="${thumbUrl}" alt=""></div>`,
+      html: `<img src="${thumbUrl}" alt="">`,
       iconSize: [48, 48],
       iconAnchor: [24, 24],
     });
 
     const marker = L.marker([lat, lon], { icon }).bindPopup(popupHtml, { closeButton: false });
-    markerCluster.addLayer(marker);
+    markers.addLayer(marker);
     markerBounds.extend([lat, lon]);
   }
 
@@ -131,6 +157,8 @@ async function loadImages(images) {
     map.fitBounds(markerBounds, { padding: [50, 50] });
   }
 }
+
+
 
 
 
