@@ -54,6 +54,18 @@ html {
     display: block;
 }
 
+.popup-image video {
+    width: 100%;
+    height: auto;
+    /* maintain aspect ratio */
+    object-fit: contain;
+    /* contain inside popup */
+    border-radius: 6px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
 .popup-text {
     /* line-height: 1.4; */
     /* white-space: pre-line; */
