@@ -1,1 +1,47 @@
-[]
+[
+    {
+        "path": "images/1.jpg",
+        "coordinates": "46.951610, 7.458818",
+        "description": ""
+    },
+    {
+        "path": "images/2.mp4",
+        "coordinates": "44.7705843, 17.1907778",
+        "description": ""
+    },
+    {
+        "path": "images/3.mp4",
+        "coordinates": "47.3656727, 8.5419161",
+        "description": ""
+    },
+    {
+        "path": "images/4.jpg",
+        "coordinates": "46.6186777, 12.3027679",
+        "description": ""
+    },
+    {
+        "path": "images/5.jpg",
+        "coordinates": "37.96968, 23.72632",
+        "description": ""
+    },
+    {
+        "path": "images/6.mp4",
+        "coordinates": "37.1761339, -3.5998342",
+        "description": ""
+    },
+    {
+        "path": "images/7.jpg",
+        "coordinates": "52.376834, 4.899288",
+        "description": ""
+    },
+    {
+        "path": "images/8.mp4",
+        "coordinates": "44.111808, 15.234392",
+        "description": ""
+    },
+    {
+        "path": "images/9.mp4",
+        "coordinates": "44.7686677, 17.1871290",
+        "description": ""
+    }
+]

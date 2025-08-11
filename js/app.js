@@ -30,7 +30,7 @@ osm.addTo(map);
 const baseLayers = {
   "OpenStreetMap": osm,
   "OpenTopoMap": topo,
-  "Ortofoto": esriSat,
+  "Satelit": esriSat,
   "Toner": Stadia_StamenToner,
 };
 
@@ -84,6 +84,27 @@ function formatExifDateTime(dateTimeRaw) {
   return `${day}.${month}.${year} ${hour}.${minute}`;
 }
 
+// Extract first frame from video
+async function getVideoFirstFrame(videoUrl) {
+  return new Promise((resolve) => {
+    const video = document.createElement('video');
+    video.src = videoUrl;
+    video.crossOrigin = 'anonymous';
+    video.muted = true;
+    video.playsInline = true;
+
+    video.addEventListener('loadeddata', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    });
+
+    video.load();
+  });
+}
 
 // Reverse geocode city using Nominatim API (async)
 async function getCityName(lat, lon) {
@@ -99,7 +120,7 @@ async function getCityName(lat, lon) {
     });
 
     const data = await res.json();
-    return data.address.city || data.address.town || data.address.village || 'Unknown location';
+    return data.address.city || data.address.town || data.address.village || data.address.country;
   } catch {
     return 'Unknown location';
   }
@@ -108,10 +129,22 @@ async function getCityName(lat, lon) {
 
 // Main image loading function
 async function loadImages(images) {
-  for (const {path, description} of images) {
-    // Load image
+  for (const { path, coordinates, description} of images) {
+    // Load image or video thumbnail
+    const isVideo = /\.{mp4|webm|ogg}$/i.test(path);
+    
+    let lat, lon;
+    
+    // Get coordinates
+    if (!coordinates){
+      console.warn("No coordinates, skiping file ${path}")
+      continue;
+    }
+    [lat, lon] = coordinates.split(",").map(Number);
+    
+
     const img = new Image();
-    img.src = path;
+    img.src = isVideo ? getVideoFirstFrame(path) : path; // Image to show on map as marker
 
     // Wait for image to load EXIF data
     await new Promise((resolve) => {
@@ -136,6 +169,7 @@ async function loadImages(images) {
             const s = coords[2].numerator / coords[2].denominator;
             let dec = d + m / 60 + s / 3600;
             if (ref === 'S' || ref === 'W') dec = -dec;
+            print(dec)
             return dec;
           }
 
