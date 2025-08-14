@@ -1,12 +1,6 @@
-const map = L.map('map').setView([0, 0], 2);
+const map = L.map('map');
 
-var Stadia_OSMBright = L.tileLayer('https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.{ext}', {
-  minZoom: 0,
-  maxZoom: 20,
-  attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  ext: 'png'
-});
-
+// Basemap sources
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '© OpenStreetMap contributors'
@@ -23,20 +17,21 @@ const esriSat = L.tileLayer(
   maxZoom: 19,
 });
 
-
-// Add default layer to map
-esriSat.addTo(map);
+let basemaps = [
+  { name: 'Satelit', layer: esriSat, thumb: 'map-previews/ortofoto.jpg' },
+  { name: 'OSM', layer: osm, thumb: 'map-previews/OSM.jpg' },
+  { name: 'Topo', layer: topo, thumb: 'map-previews/topo.jpg' }
+];
 
 // Create base layers object
 const baseLayers = {
-  "Svetla karta": Stadia_OSMBright,
   "OpenStreetMap": osm,
   "OpenTopoMap": topo,
   "Satelit": esriSat,
 };
 
-// Add layer control to map
-L.control.layers(baseLayers, null, { collapsed: false }).addTo(map);
+var layerControl = L.control.layers(baseLayers).addTo(map);
+esriSat.addTo(map);
 
 
 const markers = L.markerClusterGroup({
@@ -68,15 +63,19 @@ const markers = L.markerClusterGroup({
 map.addLayer(markers);
 
 const markerBounds = L.latLngBounds();
-const refPoint = { lat: 46.049698, lon: 14.109393 }; // KŽŠ koordinate
+const kžš_loc = { lat: 46.049698, lon: 14.109393 }; // KŽŠ koordinate
 
-const specialMarker = L.marker(refPoint, {
-  icon: L.icon({
-    iconUrl: 'images/kžš-simple.png',
-    iconSize: [32, 32],
+const specialMarker = L.marker(kžš_loc, {
+  icon: L.divIcon({
+    html: `<a href="https://klub-kzs.si" target="_blank">
+             <img src="images/kžš-simple.png" width="32" height="32">
+           </a>`,
+    className: '', // prevent Leaflet default styles
+    iconSize: [32, 32]
   }),
-  zIndexOffset: -1000 // makes it appear below others
+  zIndexOffset: -10
 }).addTo(map);
+
 
 
 // Haversine distance in km
@@ -110,8 +109,6 @@ async function getCityName(lat, lon) {
   }
 }
 
-
-
 // Main image loading function
 async function loadImages(images) {
   for (const { path, coordinates, description, city, dateTime} of images) {
@@ -119,23 +116,23 @@ async function loadImages(images) {
     const isVideo = /\.(mp4|webm|ogg)$/i.test(path);
     const thumbUrl = isVideo ? path.replace(/\.[^\/.]+/, ".jpg") : path;
 
-    const distanceKm = getDistance(refPoint.lat, refPoint.lon, lat, lon).toFixed(1);
+    const distanceKm = getDistance(kžš_loc.lat, kžš_loc.lon, lat, lon).toFixed(1);
 
     const popupHtml = `
       <div class="popup-content">
+        <!--<div class="datetime">${dateTime || "Unknown date/time"}</div>-->
+        <div class="title-row">
+          <div class="city-name">${city}</div>
+          <div class="distance">${distanceKm} km</div>
+        </div>
+        <div class="popup-image">
+        ${
+            isVideo
+            ? `<video autoplay muted loop playsinline" src="${path}"></video>`
+            : `<img src="${thumbUrl}" alt="Preview"/>`
+          }
+        </div>
         <div class="popup-text">
-          <div class="datetime">${dateTime || "Unknown date/time"}</div>
-          <div class="city-row">
-            <div class="city-name">${city}</div>
-            <div class="distance">${distanceKm} km</div>
-          </div>
-          <div class="popup-image">
-            ${
-                isVideo
-                  ? `<video autoplay muted loop playsinline" src="${path}"></video>`
-                  : `<img src="${thumbUrl}" alt="Preview"/>`
-              }
-          </div>
           ${description}
         </div>
       </div>
@@ -149,6 +146,7 @@ async function loadImages(images) {
     });
 
     const marker = L.marker([lat, lon], { icon }).bindPopup(popupHtml, { closeButton: false });
+    
     markers.addLayer(marker);
     markerBounds.extend([lat, lon]);
   }
@@ -158,13 +156,39 @@ async function loadImages(images) {
   }
 }
 
-
-
-
-
 fetch('images.json')
   .then(res => res.json())
   .then(images => {(
     loadImages(images));
   })
   .catch(err => console.error('Failed to load image list:', err));
+
+
+// Create help control
+const HelpControl = L.Control.extend({
+  options: { position: 'bottomleft' },
+
+  onAdd: function (map) {
+    const button = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom help-btn');
+    button.innerHTML = '?';
+    button.title = "Informacije o zemljevidu";
+
+    L.DomEvent.disableClickPropagation(button);
+
+    button.addEventListener('click', () => {
+      document.querySelector('#mapHelpModal').classList.add('show');
+    });
+
+    return button;
+  }
+});
+
+map.addControl(new HelpControl());
+
+// Close modal on click
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal') || e.target.classList.contains('close-modal')) {
+    document.querySelector('#mapHelpModal').classList.remove('show');
+  }
+});
+

@@ -1,20 +1,32 @@
+:root{
+    --accent-color: #0b5d78;
+    --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
+    --speed: 0.1s;
+}
+
 body,
 html {
     margin: 0;
     height: 100%;
 }
 
+a {
+    color: var(--accent-color);
+}
+
 #map {
     height: 100vh;
 }
+
 
 .photo-marker {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 3px solid rgb(255, 255, 255);
+    border: 3px solid white;
     align-content: center;
     overflow: hidden;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.55);
     
 }
 
@@ -25,8 +37,12 @@ html {
     object-position: center
 }
 
+.photo-marker:hover img {
+    transform: scale(1.1);
+}
+
 .popup-content {
-    max-width: 50vw;
+    max-width: 70vw;
     min-width: 250px;
     max-height: 80vh;
     /* limit popup height */
@@ -39,13 +55,7 @@ html {
     /* scroll if content too tall */
 }
 
-.popup-image {
-    width: 100%;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.popup-image img {
+.popup-image img, .popup-image video{
     width: 100%;
     height: auto;
     /* maintain aspect ratio */
@@ -57,30 +67,16 @@ html {
     display: block;
 }
 
-.popup-image video {
-    width: 100%;
-    height: auto;
-    /* maintain aspect ratio */
-    object-fit: contain;
-    /* contain inside popup */
-    border-radius: 6px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    display: block;
-}
 
 .popup-text {
-    /* line-height: 1.4; */
-    /* white-space: pre-line; */
     font-size: 14px;
     text-align: left;
 }
 
-.city-row {
+.title-row {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    /* margin-bottom: 4px; */
 }
 
 .datetime {
@@ -94,36 +90,35 @@ html {
 }
 
 .distance {
-    font-size: 14px;
+    font-size: 12px;
+    font-family: monospace;
 }
 
-
-
-/* wrapper resets default markercluster styling */
 .custom-cluster-wrapper {
     background: transparent;
 }
+
 /* inner circular badge */
 .custom-cluster .cluster-inner {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #90c1e0;
-    border: 1.5px solid #1565c0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    background: var(--accent-color-light);
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+    transition: var(--speed);
 }
 
+/* Cluster text */
 .custom-cluster .cluster-count {
-    color: #343434;
+    color: var(--accent-color);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 800;
     text-shadow: 0 0 10px rgba(32, 32, 32, 0.318);    
     display: inline-block;
-    transform: translateY(-1px);
 }
 
-/* sizes (must match JS size values) */
 .custom-cluster.small .cluster-inner {
     width: 34px;
     height: 34px;
@@ -143,8 +138,70 @@ html {
 }
 
 
-/* hover polish */
+/* hover animation */
 .custom-cluster:hover .cluster-inner {
     transform: scale(1.06);
-    transition: transform 120ms ease-out;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.help-btn {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-color-light);
+    border: 3px solid var(--accent-color) !important;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.75);
+    
+    color: var(--accent-color);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    cursor: pointer;
+    
+    transition: var(--speed);
+}
+
+.help-btn:hover{
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: color-mix(in srgb, var(--accent-color) 50%, rgba(0, 0, 0, 0.5) 50%);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    font-family: sans-serif;
+}
+
+.close-modal {
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.faint{
+    color: rgba(0, 0, 0, 0.35);
 }
