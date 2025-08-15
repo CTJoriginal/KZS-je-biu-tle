@@ -1,5 +1,5 @@
 :root{
-    --accent-color: #0b5d78;
+    --accent-color: #660b78;
     --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
     --speed: 0.1s;
 }
@@ -147,8 +147,8 @@ a {
 }
 
 
-.control-button, 
-.leaflet-control-layers.leaflet-control{
+.control-button
+{
     width: 35px;
     height: 35px;
 
@@ -167,6 +167,12 @@ a {
     cursor: pointer;
     
     transition: var(--speed);
+
+    /* Prevents text selection because it is annoying*/
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .control-button:hover {
@@ -218,9 +224,8 @@ a {
     background: color-mix(in srgb, var(--accent-color) 10%, rgba(255, 255, 255, 0.3) 90%);
     transform: scale(1.05);
     outline: 3px solid var(--accent-color);
-    outline-offset: 1.5px;
-    
-
+    outline-offset: 1.5px;   
+}
 
 .modal {
     display: none;
@@ -253,3 +258,4 @@ a {
     font-size: 20px;
     cursor: pointer;
 }
+
