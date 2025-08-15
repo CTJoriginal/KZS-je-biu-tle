@@ -1,38 +1,83 @@
 const map = L.map('map');
+const source = " Izvorna koda: <a href = \"https://github.com/CTJoriginal/KZS-je-biu-tle\">CtjOriginal</a>"
 
 // Basemap sources
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution: '© OpenStreetMap contributors'
+  attribution: '© OpenStreetMap contributors' + source
 });
 
 const topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
   maxZoom: 17,
-  attribution: '© OpenTopoMap contributors'
+  attribution: '© OpenTopoMap contributors' + source
 });
 
 const esriSat = L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and others',
+    attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and others' + source,
   maxZoom: 19,
 });
 
 let basemaps = [
-  { name: 'Satelit', layer: esriSat, thumb: 'map-previews/ortofoto.jpg' },
-  { name: 'OSM', layer: osm, thumb: 'map-previews/OSM.jpg' },
-  { name: 'Topo', layer: topo, thumb: 'map-previews/topo.jpg' }
+  { name: 'Satelit', layer: esriSat, thumbnail: 'map-previews/ortofoto.jpg' },
+  { name: 'OSM', layer: osm, thumbnail: 'map-previews/OSM.jpg' },
+  { name: 'Topo', layer: topo, thumbnail: 'map-previews/topo.jpg' }
 ];
 
-// Create base layers object
-const baseLayers = {
-  "OpenStreetMap": osm,
-  "OpenTopoMap": topo,
-  "Satelit": esriSat,
-};
+// LAYER CONTROLLER
+var layerControl = L.Control.extend({
+  options: {position: "topright"},
+  initialize: function(mapLayers){
+    this.layers = mapLayers;
+  },
+  onAdd: function(map){
 
-var layerControl = L.control.layers(baseLayers).addTo(map);
-esriSat.addTo(map);
+    const container = L.DomUtil.create("div", "layer-switcher-wrapper");
+    const button = L.DomUtil.create("div", "control-button layer-switch", container);
+    button.innerHTML = "☰";
+    const panel = L.DomUtil.create("div", "layer-switcher-panel", container);
+    
+    L.DomEvent.disableClickPropagation(button);
+    
 
+    this.layers.forEach((layer, i) => {
+      const item = L.DomUtil.create("div", "layer-switcher-item", panel);
+      item.innerHTML = `<img src=\"${layer.thumbnail}\"></img> ${layer.name}`;
+      
+      // Swap map layer
+      item.addEventListener("click", () => {
+        this.layers.forEach(l => map.removeLayer(l.layer));
+        map.addLayer(layer.layer);
+        
+        document.querySelectorAll(".layer-switcher-item")
+          .forEach(i => i.classList.remove("selected"));
+      
+        item.classList.toggle("selected");
+      });
+
+      if (i === 0){
+        map.addLayer(layer.layer) // Activate default layer
+        item.classList.add('selected'); // mark default layer as selected in menu
+      }
+        
+    });
+    
+    // Toggle panel visibility on button click
+    button.addEventListener("click", () => {
+      panel.classList.toggle("visible");
+    });
+    
+    // Close panel if you click outside of it
+    L.DomEvent.on(document, "click", (e) => {
+      if (!container.contains(e.target)){
+        panel.classList.remove("visible");
+    }});
+
+    return container;
+  }
+});
+
+map.addControl(new layerControl(basemaps));
 
 const markers = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
@@ -166,10 +211,10 @@ fetch('images.json')
 
 // Create help control
 const HelpControl = L.Control.extend({
-  options: { position: 'bottomleft' },
+  options: { position: 'topright' },
 
   onAdd: function (map) {
-    const button = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom help-btn');
+    const button = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom control-button');
     button.innerHTML = '?';
     button.title = "Informacije o zemljevidu";
 
@@ -191,4 +236,8 @@ document.addEventListener('click', (e) => {
     document.querySelector('#mapHelpModal').classList.remove('show');
   }
 });
+
+
+
+
 

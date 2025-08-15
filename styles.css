@@ -12,6 +12,8 @@ html {
 
 a {
     color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
 }
 
 #map {
@@ -145,7 +147,8 @@ a {
 }
 
 
-.help-btn {
+.control-button, 
+.leaflet-control-layers.leaflet-control{
     width: 35px;
     height: 35px;
 
@@ -166,9 +169,58 @@ a {
     transition: var(--speed);
 }
 
-.help-btn:hover{
+.control-button:hover {
     transform: scale(1.05);
 }
+
+.layer-switcher-panel{
+    visibility: hidden;
+    position: absolute;
+    right: 45px;
+    top: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 150px;
+    font-size: 14px;
+
+    max-height: 0;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.1s ease, max-height 0.1s ease;
+}
+
+.layer-switcher-panel.visible{
+    visibility: visible;
+    max-height: 300px;
+    opacity: 1;
+}
+
+.layer-switcher-item{
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--speed);
+}
+
+.layer-switcher-item img{
+    height: 40px;
+    border-radius: 5px;
+}
+
+.layer-switcher-item:hover{
+    background: color-mix(in srgb, var(--accent-color) 10%, rgba(255, 255, 255, 0.3) 90%);
+    transform: scale(1.05);
+}
+
+.layer-switcher-item.selected img{
+    background: color-mix(in srgb, var(--accent-color) 10%, rgba(255, 255, 255, 0.3) 90%);
+    transform: scale(1.05);
+    outline: 3px solid var(--accent-color);
+    outline-offset: 1.5px;
+    
+
 
 .modal {
     display: none;
@@ -200,8 +252,4 @@ a {
     float: right;
     font-size: 20px;
     cursor: pointer;
-}
-
-.faint{
-    color: rgba(0, 0, 0, 0.35);
 }
