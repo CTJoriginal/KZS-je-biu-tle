@@ -193,6 +193,12 @@ a {
     max-height: 0;
     opacity: 0;
     transition: visibility 0s, opacity 0.1s ease, max-height 0.1s ease;
+
+    /* Prevents text selection because it is annoying*/
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .layer-switcher-panel.visible{

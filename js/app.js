@@ -72,7 +72,7 @@ var layerControl = L.Control.extend({
     button.title = "Izbira zemljevida"
     button.innerHTML = "☰";
 
-    L.DomEvent.disableClickPropagation(button);
+    L.DomEvent.disableClickPropagation(container);
     
     this.layers.forEach((layer, i) => {
       const item = L.DomUtil.create("div", "layer-switcher-item", panel);
