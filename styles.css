@@ -1,5 +1,5 @@
 :root{
-    --accent-color: #660b78;
+    --accent-color: #0c466d;
     --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
     --speed: 0.1s;
 }
@@ -55,6 +55,10 @@ a {
     text-align: center;
     overflow: auto;
     /* scroll if content too tall */
+}
+
+.popup-content {
+    pointer-events: none;
 }
 
 .popup-image img, .popup-image video{
@@ -151,7 +155,7 @@ a {
 {
     width: 35px;
     height: 35px;
-
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -167,16 +171,23 @@ a {
     cursor: pointer;
     
     transition: var(--speed);
-
+    
     /* Prevents text selection because it is annoying*/
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    
+    overflow: hidden;
 }
 
 .control-button:hover {
     transform: scale(1.05);
+}
+
+.control-button svg{
+    width: 65%;
+    height: 65%;
 }
 
 .layer-switcher-panel{

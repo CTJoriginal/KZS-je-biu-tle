@@ -49,7 +49,8 @@ async function loadImages(images) {
             iconAnchor: [24, 24],
         });
 
-        const marker = L.marker([lat, lon], { icon }).bindPopup(popupHtml, { closeButton: false });
+        const marker = L.marker([lat, lon], { icon }).bindPopup(popupHtml, { closeButton: false});
+
 
         markers.addLayer(marker);
         markerBounds.extend([lat, lon]);

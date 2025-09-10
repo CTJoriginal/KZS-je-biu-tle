@@ -82,5 +82,19 @@
         "description": "",
         "city": "Montaña Roja, Lanzarote",
         "dateTime": "21.7.2025"
+    },
+    {
+        "path": "images/13.mp4",
+        "coordinates": "38.1209852, 13.3577993",
+        "description": "",
+        "city": "Palerm",
+        "dateTime": "15.8.2025"
+    },
+    {
+        "path": "images/14.png",
+        "coordinates": "35.9018835884496, 14.513915506993458",
+        "description": "Mal dobronamernega vandalizma :)",
+        "city": "San Bastjan, Malta",
+        "dateTime": "21.8.2025"
     }
 ]
