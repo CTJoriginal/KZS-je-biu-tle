@@ -21,6 +21,9 @@ a {
     height: 100vh;
 }
 
+.leaflet-container{
+    background: color-mix(in srgb, var(--accent-color) 30%, #000000 70%);
+}
 
 .photo-marker {
     width: 40px;
