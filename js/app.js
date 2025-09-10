@@ -38,7 +38,7 @@ const kžš_loc = { lat: 46.049698, lon: 14.109393 }; // KŽŠ coordinates for c
 // KŽŠ marker with link to our website
 L.marker(kžš_loc, {
   icon: L.divIcon({
-    html: `<a href="https://klub-kzs.si" target="_blank">
+    html: `<a href="https://klub-kzs.si" target="_blank" alt="Odpri KŽŠ spletno stran">
              <img src="images/kžš-simple.png" width="32" height="32">
            </a>`,
     className: '',
@@ -181,25 +181,22 @@ map.addControl(new DefaultView(markerBounds));
 // MARKER CLUSTERS
 const markers = L.markerClusterGroup({
   iconCreateFunction: function (cluster) {
-    const count = cluster.getChildCount();
+    const count = cluster.getChildCount(); // Number on cluster
+    const numOfMarkers = markers.getLayers().length;
+
+    const min_size = 34;
+    const max_size = 60;
     
-    // Size of cluster depends from number of markers in cluster
-    const bucket =
-    count < 3 ? { cls: 'small', size: 10 } :
-    count < 10 ? { cls: 'medium', size: 30 } :
-    { cls: 'large', size: 54 };
-    
-    const html = `<div class="custom-cluster ${bucket.cls}" role="button" aria-label="${count} items">
-                    <div class="cluster-inner">
-                      <span class="cluster-count">${count}</span>
-                    </div>
-                  </div>`;
+    // Linear interpolation of marker size based on minimum and maksimum size
+    const clusterSize = (min_size * (numOfMarkers - count) + max_size * count) / numOfMarkers;
 
     return L.divIcon({
-      html,
+      html: `<div class="custom-cluster" style="--cluster-size:${clusterSize}px" role="button" aria-label="${count} items">
+                      ${count}
+                  </div>`,
       className: 'custom-cluster-wrapper',
-      iconSize: L.point(bucket.size, bucket.size),
-      iconAnchor: L.point(Math.round(bucket.size / 2), Math.round(bucket.size / 2)),
+      iconSize: L.point(clusterSize, clusterSize),
+      iconAnchor: L.point(Math.round(clusterSize / 2), Math.round(clusterSize / 2)),
     });
   },
   showCoverageOnHover: false,
