@@ -45,8 +45,7 @@ async function loadImages(images) {
                 <div class="popup-image">
                 ${nalepka.isVideo
                 ? `<video autoplay muted loop playsinline" src="${nalepka.path}"></video>`
-                : `<img src="${nalepka.thumbUrl}" alt="Preview"/>`
-            }
+                : `<img src="${nalepka.thumbUrl}" alt="Preview"/>`}
                 </div>
                 <div class="popup-text">
                 ${nalepka.description}
@@ -72,6 +71,14 @@ async function loadImages(images) {
         const marker = L.marker([nalepka.lat, nalepka.lon], { icon })
             .bindPopup(popupHtml, { closeButton: false, className: nalepka.isFarthest ? " farthest" : ""});
 
+        marker.on("popupopen", (e) => {
+            const Zoom = map.getZoom();
+            const popup = e.popup
+
+            if (Zoom < 5){
+                map.setView(popup.getLatLng(), 5, {animate: true}); //Zoom in if map is too zoomed out to see entire pop up
+            }
+        })
 
         markers.addLayer(marker);
         markerBounds.extend([nalepka.lat, nalepka.lon]);
