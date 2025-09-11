@@ -1,6 +1,9 @@
 :root {
     --accent-color: #0c466d;
     --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
+    --farthest-color: #ffd000;
+    --farthest-color-soft: color-mix(in srgb, var(--farthest-color) 50%, black 50%);
+    
     --speed: 0.1s;
 }
 
@@ -21,7 +24,7 @@ a {
     height: 100vh;
 }
 
-.leaflet-container{
+.leaflet-container {
     background: color-mix(in srgb, var(--accent-color) 30%, #000000 70%);
 }
 
@@ -30,21 +33,96 @@ a {
     height: 40px;
     border-radius: 50%;
     border: 3px solid white;
-    align-content: center;
-    overflow: hidden;
+
+    /* overflow: hidden; */
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.55);
+    position: absolute;
 }
 
-.photo-marker img {
-    width: 150%;
-    height: 150%;
-    align-self: center;
-    object-position: center
+.photo-marker svg {
+    width: 50%;
+    height: 50%;
+    color: color-mix(in srgb, var(--farthest-color) 80%, #ff0000 20% );
+
+    z-index: 10;
+    position: absolute;
+    top: -15px;
+    right: -3px;
+    rotate: 29deg;
+}
+
+/*Crop image to circular container*/
+.photo-marker-wrapper{
+    width: 100% !important;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.photo-marker-wrapper img {
+    width:  100% !important;
+    height: 100% !important;
+
+    object-fit: cover  !important; 
+} 
+
+.photo-marker.farthest {
+    border: 3px solid var(--farthest-color);
+    animation: glow 4s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 4px var(--farthest-color);
+    }    
+    to {
+        box-shadow: 0 0 8px var(--farthest-color);
+    }
 }
 
 .photo-marker:hover img {
     transform: scale(1.1);
 }
+
+
+.farthest .leaflet-popup-content-wrapper{
+    position: relative;
+    border: 3px solid var(--farthest-color);
+    background: #171600;
+    color: #fff;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #171600 30%, var(--farthest-color-soft) 35%, #171600 40%, var(--farthest-color-soft), #171600 60%);
+    background-size: 500%;
+    background-position-x: 100%;
+    animation: epic 5s infinite linear;
+
+    box-shadow: 0 0 8px var(--farthest-color);
+}
+.farthest .leaflet-popup-content-wrapper .popup-content {
+    color: #fff;
+}
+
+
+/* animation moves the streak across */
+@keyframes epic {
+    0% {
+        background-position-x: 100%
+    }
+    20%{
+        background-position-x: 0%
+    }
+    100%{
+        background-position-x: 0%
+    }
+}
+
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+    margin: 8px;
+    border-radius: 8px;
+}
+
+
 
 .popup-content {
     max-width: 70vw;
@@ -57,11 +135,13 @@ a {
     color: #333;
     text-align: center;
     overflow: auto;
-}
-
-.popup-content {
     pointer-events: none;
 }
+
+/* .popup-content.farthest {
+    box-shadow: 0 0 8px var(--farthest-color);
+    
+} */
 
 .popup-image img,
 .popup-image video {
@@ -183,7 +263,6 @@ a {
     opacity: 0;
     transition: visibility 0s, opacity 0.1s ease, max-height 0.1s ease;
 }
-
 
 .control-button,
 .layer-switcher-panel {

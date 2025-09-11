@@ -12,6 +12,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
 
 // Load images and create markers
 async function loadImages(images) {
+    let Nalepke = []
     for (const { path, coordinates, description, city, dateTime } of images) {
         const [lat, lon] = coordinates.split(',').map(Number);
         const isVideo = /\.(mp4|webm|ogg)$/i.test(path);
@@ -19,48 +20,69 @@ async function loadImages(images) {
 
         const distanceKm = getDistance(kžš_loc.lat, kžš_loc.lon, lat, lon).toFixed(1);
 
+        const isFarthest = false;
+
+        Nalepke.push({ path, lat, lon, isVideo, thumbUrl, distanceKm, isFarthest, description, city, dateTime });
+    }
+
+    // Find and tag the farthest sticker
+    Nalepke.reduce((a, b) => Number(a.distanceKm) > Number(b.distanceKm) ? a : b)
+        .isFarthest = true;
+
+    for (const nalepka of Nalepke) {
         const popupHtml = `
-            <div class="popup-content">
-                ${dateTime === "" ? 
-                    `<div class="title-row">
-                        <div class="distance">${distanceKm} km</div>
-                    </div>` : 
-                    `<div class="title-row">
-                        <div class="datetime">${dateTime}</div>
-                        <div class="distance">${distanceKm} km</div>
+            <div class="popup-content ${nalepka.isFarthest ? " farthest" : ""}">
+                ${nalepka.dateTime === "" ?
+                `<div class="title-row">
+                        <div class="distance">${nalepka.distanceKm} km</div>
+                    </div>` :
+                `<div class="title-row">
+                        <div class="datetime">${nalepka.dateTime}</div>
+                        <div class="distance">${nalepka.distanceKm} km</div>
                     </div>`}
 
-            <div class="city-name">${city}</div>
+            <div class="city-name">${nalepka.city}</div>
                 <div class="popup-image">
-                ${isVideo
-                        ? `<video autoplay muted loop playsinline" src="${path}"></video>`
-                        : `<img src="${thumbUrl}" alt="Preview"/>`
-                    }
+                ${nalepka.isVideo
+                ? `<video autoplay muted loop playsinline" src="${nalepka.path}"></video>`
+                : `<img src="${nalepka.thumbUrl}" alt="Preview"/>`
+            }
                 </div>
                 <div class="popup-text">
-                ${description}
+                ${nalepka.description}
                 </div>
             </div>`;
 
         const icon = L.divIcon({
-            className: 'photo-marker',
-            html: `<img src="${thumbUrl}" alt="Slika KŽŠ nalepke v ${city}">`,
+            className: `photo-marker${nalepka.isFarthest ? " farthest" : ""}`,
+            html: `
+            <div class="photo-marker-wrapper">
+                <img src="${nalepka.thumbUrl}" alt="Slika KŽŠ nalepke v ${nalepka.city}">
+            </div>
+            ${nalepka.isFarthest ? `<svg width="100%" height="100%" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                <path d="M238.72754,73.53516a15.90424,15.90424,0,0,0-16.70508-2.29981l-50.584,22.48242L141.98633,40.70312a15.999,15.999,0,0,0-27.97266,0L84.56055,93.7168,33.96875,71.23145A16.00031,16.00031,0,0,0,11.89551,89.51172l25.44531,108.333a15.83567,15.83567,0,0,0,7.4082,10.09179,16.15491,16.15491,0,0,0,12.49317,1.65137,265.89708,265.89708,0,0,1,141.46875-.01367,16.15265,16.15265,0,0,0,12.4873-1.65137,15.83531,15.83531,0,0,0,7.40821-10.084L244.0957,89.52051A15.90513,15.90513,0,0,0,238.72754,73.53516Z"
+                fill = "currentColor"/>
+            </svg>` : ""}
+                    `,
             iconSize: [48, 48],
             iconAnchor: [24, 24],
+            popupAnchor: [3, -24],
         });
 
-        const marker = L.marker([lat, lon], { icon }).bindPopup(popupHtml, { closeButton: false});
+        const marker = L.marker([nalepka.lat, nalepka.lon], { icon })
+            .bindPopup(popupHtml, { closeButton: false, className: nalepka.isFarthest ? " farthest" : ""});
 
 
         markers.addLayer(marker);
-        markerBounds.extend([lat, lon]);
+        markerBounds.extend([nalepka.lat, nalepka.lon]);
 
     }
-    
+
+
     // Upon loading, map will zoom to all active markers
     if (markerBounds.isValid()) {
         map.fitBounds(markerBounds, { padding: [50, 50] });
     }
-    
+
     return markerBounds;
 }
