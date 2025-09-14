@@ -96,5 +96,12 @@
         "description": "Mal dobronamernega vandalizma :)",
         "city": "San Bastjan, Malta",
         "dateTime": "21.8.2025"
+    },
+    {
+        "path": "images/15.png",
+        "coordinates": "-26.848904809106806, -52.984511497078636",
+        "description": "Pinhalzinho, Brazilija",
+        "city": "San Bastjan, Malta",
+        "dateTime": "11.8.2025"
     }
 ]
