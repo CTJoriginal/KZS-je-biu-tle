@@ -1,3 +1,4 @@
+const icon_size = 44;
 
 // Haversine distance bewtwwn 2 points on Earth in km
 function getDistance(lat1, lon1, lat2, lon2) {
@@ -63,9 +64,9 @@ async function loadImages(images) {
                 fill = "currentColor"/>
             </svg>` : ""}
                     `,
-            iconSize: [48, 48],
-            iconAnchor: [24, 24],
-            popupAnchor: [3, -24],
+            iconSize: [icon_size, icon_size],
+            iconAnchor: [icon_size / 2, icon_size / 2],
+            popupAnchor: [3, -icon_size / 2],
         });
 
         const marker = L.marker([nalepka.lat, nalepka.lon], { icon })

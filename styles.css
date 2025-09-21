@@ -138,11 +138,6 @@ a {
     pointer-events: none;
 }
 
-/* .popup-content.farthest {
-    box-shadow: 0 0 8px var(--farthest-color);
-    
-} */
-
 .popup-image img,
 .popup-image video {
     width: 100%;

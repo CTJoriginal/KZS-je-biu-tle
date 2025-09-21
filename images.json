@@ -103,5 +103,33 @@
         "description": "Pinhalzinho, Brazilija",
         "city": "San Bastjan, Malta",
         "dateTime": "11.8.2025"
+    },
+    {
+        "path": "images\\16.mp4",
+        "coordinates": "36.453067, 28.217350",
+        "description": "",
+        "city": "Rhodes, Grčija",
+        "dateTime": "19.9.2025"
+    },
+    {
+        "path": "images\\17.png",
+        "coordinates": "35.90656629242235, 14.509901170195064",
+        "description": "",
+        "city": "Gżira, Malta",
+        "dateTime": "10.9.2025"
+    },
+    {
+        "path": "images\\18.jpg",
+        "coordinates": "39.0652026, -8.8774949",
+        "description": "",
+        "city": "Azambuja, Portugalska",
+        "dateTime": "sep 2025"
+    },
+    {
+        "path": "images\\19.mp4",
+        "coordinates": "38.712804454033524, -9.132885844483772",
+        "description": "",
+        "city": "Lisboa, Portugalska",
+        "dateTime": "sep 2025"
     }
 ]

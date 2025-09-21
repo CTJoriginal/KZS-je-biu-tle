@@ -39,7 +39,7 @@ const kžš_loc = { lat: 46.049698, lon: 14.109393 }; // KŽŠ coordinates for c
 L.marker(kžš_loc, {
   icon: L.divIcon({
     html: `<a href="https://klub-kzs.si" target="_blank" alt="Odpri KŽŠ spletno stran">
-             <img src="images/kžš-simple.png" width="32" height="32">
+             <img src="js/media/kžš-simple.png" width="32" height="32">
            </a>`,
     className: '',
     iconSize: [32, 32]
@@ -58,7 +58,7 @@ fetch('images.json')
 
 
 // LAYER CONTROLLER
-var layerControl = L.Control.extend({
+const layerControl = L.Control.extend({
   options: {position: "topright"},
   initialize: function(mapLayers){
     this.layers = mapLayers;
