@@ -131,5 +131,12 @@
         "description": "",
         "city": "Lisboa, Portugalska",
         "dateTime": "sep 2025"
+    },
+    {
+        "path": "images\\20.jpg",
+        "coordinates": "46.047347489441634, 14.109730376294905",
+        "description": "Več kot 25 let nazaj je kŽŠ postavil ta smerokaz, na katerem so obeležili vsa mesta (in zračne razdalje do njih), ki so jih obiskali takratni člani kluba.",
+        "city": "KŽŠ je biu pousod tle",
+        "dateTime": "do leta 1999"
     }
 ]
