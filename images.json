@@ -100,8 +100,8 @@
     {
         "path": "images/15.png",
         "coordinates": "-26.848904809106806, -52.984511497078636",
-        "description": "Pinhalzinho, Brazilija",
-        "city": "San Bastjan, Malta",
+        "description": "",
+        "city": "Pinhalzinho, Brazilija",
         "dateTime": "11.8.2025"
     },
     {
@@ -138,5 +138,12 @@
         "description": "Več kot 25 let nazaj je kŽŠ postavil ta smerokaz, na katerem so obeležili vsa mesta (in zračne razdalje do njih), ki so jih obiskali takratni člani kluba.",
         "city": "KŽŠ je biu pousod tle",
         "dateTime": "do leta 1999"
+    },
+    {
+        "path": "images\\21.png",
+        "coordinates": "36.45702761476142, 28.221108970705114",
+        "description": "",
+        "city": "Rhodes, Grčija",
+        "dateTime": "24.9.2025"
     }
 ]

@@ -35,17 +35,17 @@ let basemaps = [
 const markerBounds = L.latLngBounds();
 const kžš_loc = { lat: 46.049698, lon: 14.109393 }; // KŽŠ coordinates for computing distance of stickers
 
-// KŽŠ marker with link to our website
-L.marker(kžš_loc, {
-  icon: L.divIcon({
-    html: `<a href="https://klub-kzs.si" target="_blank" alt="Odpri KŽŠ spletno stran">
-             <img src="js/media/kžš-simple.png" width="32" height="32">
-           </a>`,
-    className: '',
-    iconSize: [32, 32]
-  }),
-  zIndexOffset: -10
-}).addTo(map);
+// // KŽŠ marker with link to our website
+// L.marker(kžš_loc, {
+//   icon: L.divIcon({
+//     html: `<a href="https://klub-kzs.si" target="_blank" alt="Odpri KŽŠ spletno stran">
+//              <img src="js/media/kžš-simple.png" width="32" height="32">
+//            </a>`,
+//     className: '',
+//     iconSize: [32, 32]
+//   }),
+//   zIndexOffset: -10
+// }).addTo(map);
 
 // Load all images to map
 fetch('images.json')
