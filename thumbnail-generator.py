@@ -3,6 +3,11 @@ import os
 import json
 import re
 import requests
+from datetime import datetime
+import locale
+
+locale.setlocale(locale.LC_TIME, "sl_SI.UTF-8")
+
 
 media_dir = "images"
 
@@ -34,16 +39,17 @@ def reverse_geocode(lat, lon):
     address = data['address']
     city = address.get('city') or address.get('town') or address.get('village')
     
-    return f"{city}, {address.get("country", "")}"
-
-
-
+    return f"{city}, {address.get('country', '')}"
 
 with open("images.json", "r", encoding="utf8") as json_doc:
     data = json.load(json_doc)
-    
-    
+
+data_indexes = [re.findall(r"\d+", d["path"])[0] for d in data]
+
 for media_path in os.listdir(media_dir):
+    media_index = re.findall(r"\d+", media_path)[0] # Index in name of file
+    thumbnail_path = ""
+    
     if media_path.lower().endswith((".mp4", ".avi", ".mov", ".mkv", ".webm")):
         video_path = os.path.join(media_dir, media_path)
         base_name = os.path.splitext(media_path)[0]
@@ -52,25 +58,24 @@ for media_path in os.listdir(media_dir):
         if not os.path.exists(thumbnail_path):
             generate_thumbnail(video_path, thumbnail_path)
 
-    if not any(re.findall(r"\d+", f["path"].lower())[0] == re.findall(r"\d+", media_path)[0] for f in data):
+
+    if not media_index in data_indexes:
+        print(f"added {media_path}")
+        data_indexes.append(media_index)
         data.append({
-            "path": video_path,
+            "path": os.path.join(media_dir, media_path),
             "coordinates": "",
             "description": "",
             "city": "",
-            "dateTime": ""
+            "dateTime": datetime.now().strftime("%B %Y").capitalize()
         })
         
-for d in data:
-    if d["coordinates"] != "" and d ["city"] == "":
-        lat, lon = d["coordinates"].split(",")
-        d["city"] = reverse_geocode(lat, lon)
+for media in data:
+    if media["coordinates"] != "" and media["city"] == "":
+        lat, lon = media["coordinates"].split(",")
+        media["city"] = reverse_geocode(lat, lon)
         
-data.sort(key = lambda f: int(re.findall(r"\d+", f["path"].lower())[0]))
-
-for f in data:
-    print(f["path"])
-
+data.sort(key = lambda f: int(re.findall(r"\d+", f["path"])[0]))
 
 with open("images.json", "w", encoding="utf8") as f:
     json.dump(data, f, indent=4, ensure_ascii=False)

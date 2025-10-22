@@ -1,4 +1,8 @@
 const icon_size = 44;
+let prev_zoom = 0;
+let prev_latLong;
+const targetZoom = 16; // Zoom level after clicking on marker
+
 
 // Haversine distance bewtwwn 2 points on Earth in km
 function getDistance(lat1, lon1, lat2, lon2) {
@@ -10,6 +14,16 @@ function getDistance(lat1, lon1, lat2, lon2) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
+
+function gezZoomDuration(level1, level2, maxDuration = 2, minDuration = 0.05, maxlevel = 17){
+    // computes zoom time using linear interpolation
+    // Bigger difference between 2 levels take longer time to zoom in
+
+    const duration = minDuration + Math.abs(level1 - level2) * (maxDuration - minDuration) / maxlevel;
+    console.log(duration);
+    return duration;
+}
+
 
 // Load images and create markers
 async function loadImages(images) {
@@ -73,13 +87,43 @@ async function loadImages(images) {
             .bindPopup(popupHtml, { closeButton: false, className: nalepka.isFarthest ? " farthest" : ""});
 
         marker.on("popupopen", (e) => {
-            const Zoom = map.getZoom();
-            const popup = e.popup
+            prev_zoom = map.getZoom();
+            const DynamicZoomTarget = map.getZoom() > targetZoom ? map.getZoom() : targetZoom;
+            const popup = e.popup;
+            const popupEl = popup.getElement();
+            const popupHeight = popupEl.offsetHeight;
+            const padding = 15;
 
-            if (Zoom < 5){
-                map.setView(popup.getLatLng(), 5, {animate: true}); //Zoom in if map is too zoomed out to see entire pop up
+            // Project the latLng to pixel coordinates at the target zoom
+            const projected = map.project(popup.getLatLng(), DynamicZoomTarget);
+
+            // Shift up by half popup height + padding
+            const shifted = L.point(projected.x, projected.y - (popupHeight / 2 + padding));
+
+            // Convert back to latLng at target zoom
+            const shiftedLatLng = map.unproject(shifted, DynamicZoomTarget);
+
+            map.flyTo(shiftedLatLng, DynamicZoomTarget, {
+                animate: true, 
+                duration: gezZoomDuration(prev_zoom, DynamicZoomTarget) }); // Zoom map to computed coordinate
+            prev_latLong = shiftedLatLng;
+        });
+
+        
+        marker.getPopup().on("remove", (e) => {
+            const mapZoom = map.getZoom();
+            const popupLatLng = e.target.getLatLng(); // e.target is the popup
+            const currentCenter = map.getCenter()
+            // console.log(currentCenter.distanceTo(prev_latLong))
+            console.log(prev_zoom - mapZoom)
+
+            if (currentCenter.distanceTo(prev_latLong) < 1000 && mapZoom <= targetZoom) {
+                map.flyTo(popupLatLng, prev_zoom, { 
+                animate: true, 
+                duration: gezZoomDuration(prev_zoom, mapZoom, 1) // duration in seconds
+             }); 
             }
-        })
+        });
 
         markers.addLayer(marker);
         markerBounds.extend([nalepka.lat, nalepka.lon]);

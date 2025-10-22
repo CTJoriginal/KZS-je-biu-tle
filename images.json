@@ -1,104 +1,104 @@
 [
     {
-        "path": "images/1.jpg",
+        "path": "images\\1.jpg",
         "coordinates": "46.951610, 7.458818",
         "description": "Iz mesta se sliši nastopanje uličnih glasbenikov na festivalu buskers Bern, mi pa smo uživali v čudovitem sončnem zahodu!",
         "city": "Bern",
         "dateTime": "10.08.2025"
     },
     {
-        "path": "images/2.mp4",
+        "path": "images\\2.mp4",
         "coordinates": "44.7705843, 17.1907778",
         "description": "",
         "city": "Banja Luka",
         "dateTime": ""
     },
     {
-        "path": "images/3.mp4",
+        "path": "images\\3.mp4",
         "coordinates": "47.3656727, 8.5419161",
         "description": "",
         "city": "Zürich",
         "dateTime": ""
     },
     {
-        "path": "images/4.jpg",
+        "path": "images\\4.jpg",
         "coordinates": "46.6186777, 12.3027679",
         "description": "",
         "city": "Cima Grande",
         "dateTime": ""
     },
     {
-        "path": "images/5.jpg",
+        "path": "images\\5.jpg",
         "coordinates": "37.96968, 23.72632",
         "description": "",
         "city": "Atene",
         "dateTime": ""
     },
     {
-        "path": "images/6.mp4",
+        "path": "images\\6.mp4",
         "coordinates": "37.1761339, -3.5998342",
         "description": "",
         "city": "Granada",
         "dateTime": ""
     },
     {
-        "path": "images/7.jpg",
+        "path": "images\\7.jpg",
         "coordinates": "52.376834, 4.899288",
         "description": "",
         "city": "Amsterdam",
         "dateTime": "02.08.2025"
     },
     {
-        "path": "images/8.mp4",
+        "path": "images\\8.mp4",
         "coordinates": "44.111808, 15.234392",
         "description": "",
         "city": "Zadar",
         "dateTime": ""
     },
     {
-        "path": "images/9.mp4",
+        "path": "images\\9.mp4",
         "coordinates": "44.7686677, 17.1871290",
         "description": "",
         "city": "Banja Luka",
         "dateTime": ""
     },
     {
-        "path": "images/10.png",
+        "path": "images\\10.png",
         "coordinates": "46.493652, 15.107746",
         "description": "",
         "city": "Šmartno pri Slovenj Gradcu",
         "dateTime": "10.8.2025"
     },
     {
-        "path": "images/11.png",
+        "path": "images\\11.png",
         "coordinates": "42.319137, 78.532110",
         "description": "",
         "city": "Ak-Suu, Kirgizija",
         "dateTime": ""
     },
     {
-        "path": "images/12.png",
+        "path": "images\\12.png",
         "coordinates": "28.8630467, -13.8677673",
         "description": "",
         "city": "Montaña Roja, Lanzarote",
         "dateTime": "21.7.2025"
     },
     {
-        "path": "images/13.mp4",
+        "path": "images\\13.mp4",
         "coordinates": "38.1209852, 13.3577993",
         "description": "",
         "city": "Palerm",
         "dateTime": "15.8.2025"
     },
     {
-        "path": "images/14.png",
+        "path": "images\\14.png",
         "coordinates": "35.9018835884496, 14.513915506993458",
         "description": "Mal dobronamernega vandalizma :)",
         "city": "San Bastjan, Malta",
         "dateTime": "21.8.2025"
     },
     {
-        "path": "images/15.png",
+        "path": "images\\15.png",
         "coordinates": "-26.848904809106806, -52.984511497078636",
         "description": "",
         "city": "Pinhalzinho, Brazilija",
@@ -145,5 +145,33 @@
         "description": "",
         "city": "Rhodes, Grčija",
         "dateTime": "24.9.2025"
+    },
+    {
+        "path": "images\\22.png",
+        "coordinates": "40.820873, 14.422881",
+        "description": "",
+        "city": "Vezuv, Italija",
+        "dateTime": "Oktober 2025"
+    },
+    {
+        "path": "images\\23.jpg",
+        "coordinates": "45.438141, 12.336011",
+        "description": "",
+        "city": "benetke, Italija",
+        "dateTime": "Oktober 2025"
+    },
+    {
+        "path": "images\\24.png",
+        "coordinates": "28.842826, -13.787549",
+        "description": "Kljub temu, da nisva več študenta sva si drznila nabit nalepko na Papgaya beach na otoku Lanzarote na Kanarskih otokih! KŽŠ ruls 🤘",
+        "city": "Papgaya beach, Lanzarote",
+        "dateTime": "Oktober 2025"
+    },
+    {
+        "path": "images\\25.png",
+        "coordinates": "13.376245533354998, -16.772385718733602",
+        "description": "",
+        "city": "Kids Are The World Nursery School, Gambija",
+        "dateTime": "Oktober 2025"
     }
 ]
