@@ -178,14 +178,18 @@ const DefaultView = L.Control.extend({
 
 map.addControl(new DefaultView(markerBounds));
 
+const min_size = 30;
+const max_size = 50;
+
 // MARKER CLUSTERS
 const markers = L.markerClusterGroup({
+  maxClusterRadius: function(zoom){
+    return min_size + zoom * (max_size - min_size) / 17
+  },
   iconCreateFunction: function (cluster) {
     const count = cluster.getChildCount(); // Number on cluster
     const numOfMarkers = markers.getLayers().length;
 
-    const min_size = 34;
-    const max_size = 60;
     
     // Linear interpolation of marker size based on minimum and maksimum size
     const clusterSize = (min_size * (numOfMarkers - count) + max_size * count) / numOfMarkers;

@@ -19,9 +19,7 @@ function gezZoomDuration(level1, level2, maxDuration = 2, minDuration = 0.05, ma
     // computes zoom time using linear interpolation
     // Bigger difference between 2 levels take longer time to zoom in
 
-    const duration = minDuration + Math.abs(level1 - level2) * (maxDuration - minDuration) / maxlevel;
-    console.log(duration);
-    return duration;
+    return minDuration + Math.abs(level1 - level2) * (maxDuration - minDuration) / maxlevel;
 }
 
 
@@ -117,7 +115,7 @@ async function loadImages(images) {
             // console.log(currentCenter.distanceTo(prev_latLong))
             console.log(prev_zoom - mapZoom)
 
-            if (currentCenter.distanceTo(prev_latLong) < 1000 && mapZoom <= targetZoom) {
+            if (currentCenter.distanceTo(prev_latLong) < 200 && mapZoom <= targetZoom) {
                 map.flyTo(popupLatLng, prev_zoom, { 
                 animate: true, 
                 duration: gezZoomDuration(prev_zoom, mapZoom, 1) // duration in seconds
