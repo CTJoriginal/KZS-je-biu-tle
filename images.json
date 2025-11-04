@@ -173,5 +173,12 @@
         "description": "",
         "city": "Kids Are The World Nursery School, Gambija",
         "dateTime": "Oktober 2025"
+    },
+    {
+        "path": "images\\26.mp4",
+        "coordinates": "41.00909318554648, 28.977353610602684",
+        "description": "",
+        "city": "Istanbul, Turčija",
+        "dateTime": "November 2025"
     }
 ]
