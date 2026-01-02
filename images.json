@@ -180,5 +180,33 @@
         "description": "",
         "city": "Istanbul, Turčija",
         "dateTime": "November 2025"
+    },
+    {
+        "path": "images\\27.jpg",
+        "coordinates": "49.747359, 13.375306",
+        "description": "",
+        "city": "Plzeň, Česka",
+        "dateTime": "November 2026"
+    },
+    {
+        "path": "images\\28.jpg",
+        "coordinates": "50.084007, 14.400747",
+        "description": "",
+        "city": "Praga, Češka",
+        "dateTime": "November 2026"
+    },
+    {
+        "path": "images\\29.mp4",
+        "coordinates": "-33.849601, 151.213421",
+        "description": "",
+        "city": "Sidney, Australija",
+        "dateTime": "November 2026"
+    },
+    {
+        "path": "images\\30.jpg",
+        "coordinates": "50.894616, 4.342124",
+        "description": "",
+        "city": "Atomium, Bruselj",
+        "dateTime": "Januar 2026"
     }
 ]
