@@ -186,21 +186,21 @@
         "coordinates": "49.747359, 13.375306",
         "description": "",
         "city": "Plzeň, Česka",
-        "dateTime": "November 2026"
+        "dateTime": "November 2025"
     },
     {
         "path": "images\\28.jpg",
         "coordinates": "50.084007, 14.400747",
         "description": "",
         "city": "Praga, Češka",
-        "dateTime": "November 2026"
+        "dateTime": "November 2025"
     },
     {
         "path": "images\\29.mp4",
         "coordinates": "-33.849601, 151.213421",
         "description": "",
         "city": "Sidney, Australija",
-        "dateTime": "November 2026"
+        "dateTime": "November 2025"
     },
     {
         "path": "images\\30.jpg",
@@ -208,5 +208,20 @@
         "description": "",
         "city": "Atomium, Bruselj",
         "dateTime": "Januar 2026"
+    },
+    {
+        "path": "images\\31.jpg",
+        "coordinates": "45.889816, 13.902739",
+        "description": "",
+        "city": "Ajdovščina",
+        "dateTime": "Marec 2026"
+    },
+    {
+        "path": "images\\32.jpg",
+        "coordinates": "51.500902, -0.119690",
+        "description": "",
+        "city": "London",
+        "dateTime": "Marec 2026"
     }
+
 ]
