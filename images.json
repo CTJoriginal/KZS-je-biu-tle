@@ -213,14 +213,21 @@
         "path": "images\\31.png",
         "coordinates": "45.889816, 13.902739",
         "description": "",
-        "city": "Ajdovščina",
+        "city": "Ajdovščina, Slovenija",
         "dateTime": "Marec 2026"
     },
     {
         "path": "images\\32.jpg",
         "coordinates": "51.500902, -0.119690",
         "description": "",
-        "city": "London",
+        "city": "London, Britanjija",
         "dateTime": "Marec 2026"
+    },
+    {
+        "path": "images\\33.png",
+        "coordinates": "57.35253, -4.40781",
+        "description": "Denis je biu tle!",
+        "city": "Loch Ness, Škotska",
+        "dateTime": "April 2026"
     }
 ]
