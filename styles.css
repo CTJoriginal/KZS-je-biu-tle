@@ -6,6 +6,8 @@
     --farthest-color-soft: color-mix(in srgb, var(--farthest-color) 50%, black 50%);
     
     --speed: 0.1s;
+
+    --knob-pos: 0%;
 }
 
 body,
@@ -21,18 +23,17 @@ a {
     font-weight: 600;
 }
 
-#map {
-    height: 100%;
-}
 
 .mainGrid {
     display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
     height: 100vh;
     gap: 3px;
 }
 
+#map {
+    grid-area: 1 / 1 / 2 / 2;
+}
 .timeline_slider{
     height: 100%;
     width: 70px;
@@ -61,6 +62,79 @@ a {
     border-radius: 50%;
     border: solid 5px;
 }
+
+.timeline{
+    grid-area: 1 / 1 / 2 / 2;
+    z-index: 1000;
+    pointer-events: none;
+    justify-self: start;
+    margin-left: 5px;
+
+    width: 70px;
+    background: #a3a8a967;
+    border-radius: 10px;
+    border: solid 2px var(--accent-color); 
+    
+    display: grid;
+    grid-template-columns: 30% auto;
+    grid-template-rows: 1fr;
+    /* height: 100vh; */
+    gap: 3px;
+    height: 90%;
+    align-self: center;
+    backdrop-filter: blur(10px);
+}
+
+.slider-pane{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0 15px 0;
+    margin-left: 5px;
+}
+
+.slider-line{
+    position: relative;
+    background-color: var(--accent-color);
+    width: 5px;
+    border-radius: 5px;
+}
+
+.slider-knob{
+    position: absolute;
+    background-color: var(--accent-color-light);
+    width: 15px;
+    height: 15px;
+    border: solid 3px var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, 0);
+    left: 50%;
+
+    transition: none;
+
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.pips-pane{
+    /* background-color: #171737; */
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

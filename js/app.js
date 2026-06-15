@@ -207,3 +207,21 @@ const markers = L.markerClusterGroup({
 
 map.addLayer(markers);
 
+
+const knob = document.querySelector('.slider-knob');
+const line = document.querySelector('.slider-line');
+
+knob.addEventListener('pointerdown', e => {
+  knob.setPointerCapture(e.pointerId);  // keep tracking even outside element
+
+  knob.addEventListener('pointermove', onDrag);
+  knob.addEventListener('pointerup', () => {
+    knob.removeEventListener('pointermove', onDrag);
+  }, { once: true });
+});
+
+function onDrag(e) {
+  const rect = line.getBoundingClientRect();
+  const px = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+  knob.style.transform = `translate(-50%, ${px}px)`;
+}
