@@ -10,7 +10,6 @@ const source = ` Izvorna koda: <a href = \"https://github.com/CTJoriginal/KZS-je
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: `${source}© OpenStreetMap contributors`,
-
 });
 
 const topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
@@ -207,3 +206,4 @@ const markers = L.markerClusterGroup({
 });
 
 map.addLayer(markers);
+

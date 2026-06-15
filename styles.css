@@ -1,6 +1,7 @@
 :root {
-    --accent-color: #0c466d;
-    --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
+    --accent-color: #1d4243;
+    --accent-color-light: #dbe7b7;
+    /* --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%); */
     --farthest-color: #ffd000;
     --farthest-color-soft: color-mix(in srgb, var(--farthest-color) 50%, black 50%);
     
@@ -21,8 +22,47 @@ a {
 }
 
 #map {
-    height: 100vh;
+    height: 100%;
 }
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    gap: 3px;
+}
+
+.timeline_slider{
+    height: 100%;
+    width: 70px;
+    align-content: center;
+    background: var(--accent-color);
+    overflow: visible;
+    z-index: 1000;
+    padding-left: 15px;
+}
+
+
+#slider.noUi-target{
+    height: 90%;
+    width: 2px;
+    border: none;
+    box-sizing: border-box;
+    background: var(--accent-color-light);
+   
+}
+
+.noUi-value {
+    font-size: 10px;
+}
+
+.noUi-handle{
+    border-radius: 50%;
+    border: solid 5px;
+}
+
+
 
 .leaflet-container {
     background: color-mix(in srgb, var(--accent-color) 30%, #000000 70%);
