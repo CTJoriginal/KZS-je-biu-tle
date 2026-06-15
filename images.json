@@ -229,5 +229,26 @@
         "description": "Denis je biu tle!",
         "city": "Loch Ness, Škotska",
         "dateTime": "April 2026"
+    },
+    {
+        "path": "images\\34.png",
+        "coordinates": "46.32596915637425, 13.301041880222822",
+        "description": "LOKACIJA NI PRAVILNA, IŠČEM KOORDINATE...",
+        "city": "Raj na vrhu sveta",
+        "dateTime": "Maj 2026"
+    },
+    {
+        "path": "images\\35.png",
+        "coordinates": "46.167067360016084, 14.305715662949138",
+        "description": "",
+        "city": "Avtobusna postaja Škofja Loka",
+        "dateTime": "Maj 2026"
+    },
+    {
+        "path": "images\\36.jpg",
+        "coordinates": "46.03460925510179, 14.10744458050001",
+        "description": "Podružili smo se Sairach motozboru!",
+        "city": "Postotnik",
+        "dateTime": "Junij 2026"
     }
 ]

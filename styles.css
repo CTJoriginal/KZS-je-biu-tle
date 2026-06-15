@@ -1,6 +1,7 @@
 :root {
-    --accent-color: #0c466d;
-    --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%);
+    --accent-color: #1d4243;
+    --accent-color-light: #dbe7b7;
+    /* --accent-color-light: color-mix(in srgb, var(--accent-color) 40%, white 60%); */
     --farthest-color: #ffd000;
     --farthest-color-soft: color-mix(in srgb, var(--farthest-color) 50%, black 50%);
     
